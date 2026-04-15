@@ -1,0 +1,415 @@
+/* ============================================================
+   CSS Custom Properties — Dashboard Color Palette & Tokens
+   ============================================================ */
+:root {
+  /* Brand & Neutral Palette */
+  --color-bg-page: #f0f2f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-header: #1a2340;
+  --color-bg-footer: #1a2340;
+
+  --color-text-primary: #1a2340;
+  --color-text-secondary: #5a6478;
+  --color-text-inverse: #ffffff;
+  --color-text-muted: #8892a4;
+
+  --color-border-subtle: #e2e6ed;
+
+  /* Status — Sent / Success */
+  --color-sent: #2e7d32;
+  --color-sent-bg: #e8f5e9;
+  --color-sent-border: #2e7d32;
+
+  /* Status — Pending / Warning */
+  --color-pending: #b45309;
+  --color-pending-bg: #fffbeb;
+  --color-pending-border: #f59e0b;
+
+  /* Status — Failed / Danger */
+  --color-failed: #b91c1c;
+  --color-failed-bg: #fef2f2;
+  --color-failed-border: #ef4444;
+
+  /* Badge backgrounds */
+  --color-badge-completed-bg: #dcfce7;
+  --color-badge-completed-text: #166534;
+  --color-badge-pending-bg: #fef9c3;
+  --color-badge-pending-text: #854d0e;
+  --color-badge-failed-bg: #fee2e2;
+  --color-badge-failed-text: #991b1b;
+
+  /* Table */
+  --color-table-header-bg: #1a2340;
+  --color-table-header-text: #ffffff;
+  --color-table-row-even: #f8fafc;
+  --color-table-row-odd: #ffffff;
+  --color-table-row-hover: #eef2ff;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-table: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --font-family-base: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-family-mono: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.25rem;
+
+  /* Accent border width for stat cards */
+  --stat-accent-width: 5px;
+}
+
+/* ============================================================
+   CSS Reset & Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Dashboard Shell
+   ============================================================ */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---- Header ---- */
+.dashboard__header {
+  background-color: var(--color-bg-header);
+  color: var(--color-text-inverse);
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 3px solid var(--color-sent-border);
+}
+
+.dashboard__title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.dashboard__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---- Main ---- */
+.dashboard__main {
+  flex: 1;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  max-width: 1280px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* ---- Footer ---- */
+.dashboard__footer {
+  background-color: var(--color-bg-footer);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   Stat Cards
+   ============================================================ */
+.stats {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-lg);
+}
+
+.stat-card {
+  flex: 1;
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  position: relative;
+  /* Color-coded left border accent */
+  border-left: var(--stat-accent-width) solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Variant: Total Sent */
+.stat-card--sent {
+  border-left-color: var(--color-sent-border);
+  background-color: var(--color-sent-bg);
+}
+
+/* Variant: Pending */
+.stat-card--pending {
+  border-left-color: var(--color-pending-border);
+  background-color: var(--color-pending-bg);
+}
+
+/* Variant: Failed */
+.stat-card--failed {
+  border-left-color: var(--color-failed-border);
+  background-color: var(--color-failed-bg);
+}
+
+.stat-card__body {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space-xl);
+  gap: var(--space-xs);
+}
+
+.stat-card__value {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+.stat-card--sent .stat-card__value {
+  color: var(--color-sent);
+}
+
+.stat-card--pending .stat-card__value {
+  color: var(--color-pending);
+}
+
+.stat-card--failed .stat-card__value {
+  color: var(--color-failed);
+}
+
+.stat-card__label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   Transactions Section
+   ============================================================ */
+.transactions {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.transactions__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.transactions__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.transactions__table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================
+   Transaction Table
+   ============================================================ */
+.transactions__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+/* Table Header */
+.transactions__table thead tr {
+  background-color: var(--color-table-header-bg);
+}
+
+.transactions__table thead th {
+  color: var(--color-table-header-text);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: var(--space-md) var(--space-lg);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Table Body Rows */
+.transactions__table tbody tr:nth-child(odd) {
+  background-color: var(--color-table-row-odd);
+}
+
+.transactions__table tbody tr:nth-child(even) {
+  background-color: var(--color-table-row-even);
+}
+
+.transactions__table tbody tr {
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background-color 0.12s ease;
+}
+
+.transactions__table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.transactions__table tbody tr:hover {
+  background-color: var(--color-table-row-hover);
+}
+
+.transactions__table tbody td {
+  padding: var(--space-md) var(--space-lg);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Transaction ID cell */
+.txn-id {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-page);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+}
+
+/* Amount cell — right-align numerics */
+.transactions__table td.amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ============================================================
+   Status Badges
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Badge: Completed */
+.badge--completed {
+  background-color: var(--color-badge-completed-bg);
+  color: var(--color-badge-completed-text);
+}
+
+/* Badge: Pending */
+.badge--pending {
+  background-color: var(--color-badge-pending-bg);
+  color: var(--color-badge-pending-text);
+}
+
+/* Badge: Failed */
+.badge--failed {
+  background-color: var(--color-badge-failed-bg);
+  color: var(--color-badge-failed-text);
+}
+
+/* ============================================================
+   Responsive — Tablet & below
+   ============================================================ */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  .dashboard__main {
+    padding: var(--space-md);
+  }
+
+  .stat-card__value {
+    font-size: var(--font-size-2xl);
+  }
+
+  .transactions__header {
+    padding: var(--space-md);
+  }
+
+  .dashboard__header {
+    padding: var(--space-md);
+  }
+
+  .dashboard__title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card__body {
+    padding: var(--space-md);
+  }
+
+  .transactions__table thead th,
+  .transactions__table tbody td {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
